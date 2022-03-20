@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --size: 150px;
+            --shadow: 0.05;
+        }
+
+        * {
+            font-family: sans-serif;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .key-div {
+            box-shadow: 0 1px 1px rgba(0, 0, 0, var(--shadow)),
+                0 2px 2px rgba(0, 0, 0, var(--shadow)),
+                0 4px 4px rgba(0, 0, 0, var(--shadow)),
+                0 8px 8px rgba(0, 0, 0, var(--shadow)),
+                0 16px 16px rgba(0, 0, 0, var(--shadow));
+            font-size: 16px;
+            height: var(--size);
+            line-height: var(--size);
+            margin: 1px;
+            margin-left: 0;
+            text-align: center;
+            width: var(--size);
+        }
+
+        .key-span {
+            display: inline-block;
+            line-height: normal;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content"></div>
+    <script>
+        let swap = false;
+        const checkbox = document.querySelector("input");
+        const content = document.querySelector("#content");
+        const board = [
+            [
+                "Gateron Ink Black",
+                "Gateron Black",
+                "Cherry MX Silver",
+                "Kailh Cream",
+                "Gateron White",
+                "Cherry MX Red",
+                "Gateron Plum",
+            ],
+            [
+                "Kailh Plum",
+                "Gateron Yellow",
+                "Kailh Yellow",
+                "Geekmaker Teal",
+                "Momoka Frog",
+                "Gateron Box Ink Black",
+                "Gateron Box Ink Pink",
+            ],
+            [
+                "? Black",
+                "Cherry MX Clear",
+                "Everglide Clear",
+                "Kailh Burnt Orange",
+                "Cherry MX Brown",
+                "Greetech Brown",
+                "Kailh Brown",
+            ],
+            [
+                "Kailh Royal",
+                "Kailh Box Royal",
+                "Outemu Purple",
+                "Kailh Purple",
+                "Kailh Cyberpunk Eva",
+                "Kailh Box Green",
+                "Cherry MX White",
+            ],
+            [
+                "Kailh Box White",
+                "Kailh Grey",
+                "Kailh Pink",
+                "Kailh Bronze",
+                "Kailh Gold",
+                "Kailh Box Yellow",
+                "Kailh Nohomo Navy",
+            ],
+            [
+                "Kailh Box Navy",
+                "Kailh Pale Blue",
+                "Kailh Box Pale Blue",
+                "Cherry MX Blue",
+                "Gateron Blue",
+                "Kailh Blue",
+                "Cherry MX Green",
+            ],
+            [
+                "Gateron Green",
+                "Kailh Box Jade",
+                "Choc Red",
+                "Choc Yellow",
+                "Choc Brown",
+                "Choc White",
+                "Choc Blue",
+            ],
+        ]
+        bla();
+
+        function bla() {
+            const boardDiv = document.createElement("div");
+            boardDiv.className = "board";
+
+            const colors = {
+                "black": "#444",
+                "brown": "hsl(20, 30%, 30%)",
+                "cream": "beige",
+                "orange": "hsl(20, 50%, 50%)",
+                "pink": "hsl(330, 50%,70%",
+                "red": "hsl(0, 50%, 50%)",
+                "silver": "silver",
+                "teal": "teal",
+                "yellow": "hsl(40, 90%, 50%)",
+                "gold": "hsl(40, 90%, 50%)",
+
+                "green": "hsl(90, 25%, 50%)",
+                "jade": "hsl(90, 25%, 50%)",
+                "bronze": "hsl(35, 50%, 50%)",
+
+
+                "blue": "hsl(210, 50%, 50%)",
+                "eva": "hsl(310, 50%, 50%)",
+
+                "burgundy": "hsl(250, 50%, 50%)",
+                "royal": "hsl(250, 50%, 50%)",
+                "purple": "hsl(250, 50%, 50%)",
+            }
+
+            function createKey(keyText) {
+                const elDiv = document.createElement("div");
+                const elSpan = document.createElement("span");
+                const words = keyText.split(" ");
+                const bgColor = words[words.length - 1].toLowerCase();
+
+                elDiv.className = "key-div";
+                elSpan.className = "key-span";
+                elDiv.style.backgroundColor = colors[bgColor] || bgColor;
+
+                elDiv.innerHTML = keyText;
+                if (["blue", "eva", "red", "navy", "black", "teal", "brown", "purple", "royal", "burgundy"].includes(bgColor.toLowerCase())) {
+                    elDiv.style.color = "#eee";
+                }
+
+                return elDiv;
+            }
+
+            for (const [index, row] of board.entries()) {
+                const rowDiv = document.createElement("div");
+                rowDiv.className = "row";
+
+                for (const key of row) {
+                    rowDiv.appendChild(createKey(key));
+                }
+
+                boardDiv.appendChild(rowDiv);
+            }
+
+            content.innerHTML = "";
+            content.appendChild(boardDiv);
+            document.body.appendChild(content);
+        }
+    </script>
+</body>
+
+</html>
